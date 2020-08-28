@@ -38,6 +38,115 @@ public class MakeChange {
 	
 	public static void calcChange(double changeAmount) {
 		
+		int twentyAmount = 0, tenAmount = 0, fiveAmount = 0, oneAmount = 0,
+			quarterAmount = 0, dimeAmount = 0, nickelAmount = 0, pennyAmount = 0;
+		
+		
+			if (changeAmount / 20 >= 1 ) {
+				twentyAmount = (int)(changeAmount / 20);
+				changeAmount %= 20;
+				changeTwenty(twentyAmount);
+			}
+			if (changeAmount / 10 >= 1 ) {
+				tenAmount = (int)(changeAmount / 10);
+				changeAmount %= 10;
+				changeTen(tenAmount);
+			}
+			if (changeAmount / 5 >= 1 ) {
+				fiveAmount = (int)(changeAmount / 5);
+				changeAmount %= 5;
+				changeFive(fiveAmount);
+			}
+			if (changeAmount / 1 >= 1 ) {
+				oneAmount = (int)(changeAmount / 1);
+				changeAmount %= 1;
+				changeOne(oneAmount);
+				System.err.println(changeAmount);
+			}
+			if (changeAmount / 0.25 >= 1 ) {
+				quarterAmount = (int)(changeAmount / 0.25);
+				changeAmount %= 0.25;
+				changeQuarter(quarterAmount);
+				System.err.println(changeAmount);
+			}
+			if (changeAmount / 0.10 >= 1 ) {
+				dimeAmount = (int)(changeAmount / 0.10);
+				changeAmount %= 0.10;
+				changeDime(dimeAmount);
+				System.err.println(changeAmount);
+			}
+			if (changeAmount / 0.05 >= 1 ) {
+				nickelAmount = (int)(changeAmount / 0.05);
+				changeAmount %= 0.05;
+				changeNickel(nickelAmount);
+				System.err.println(changeAmount);
+			}
+			if (changeAmount / 0.01 >= 1 ) {
+				pennyAmount = (int)(changeAmount / 0.01);
+				changeAmount %= 0.01;
+				changePenny(pennyAmount);
+				System.err.println(changeAmount);
+			}
+		
+		
+		
+	}
+	
+	public static void changeTwenty(int quantity) {
+		String changeString = " twenty dollar bill";
+		if (quantity > 1) {
+			changeString += "s";
+		}
+		System.out.println(quantity + changeString);
+	}
+	public static void changeTen(int quantity) {
+		String changeString = " ten dollar bill";
+		if (quantity > 1) {
+			changeString += "s";
+		}
+		System.out.println(quantity + changeString);
+	}
+	public static void changeFive(int quantity) {
+		String changeString = " five dollar bill";
+		if (quantity > 1) {
+			changeString += "s";
+		}
+		System.out.println(quantity + changeString);
+	}
+	public static void changeOne(int quantity) {
+		String changeString = " one dollar bill";
+		if (quantity > 1) {
+			changeString += "s";
+		}
+		System.out.println(quantity + changeString);
+	}
+	public static void changeQuarter(int quantity) {
+		String changeString = " quarter";
+		if (quantity > 1) {
+			changeString += "s";
+		}
+		System.out.println(quantity + changeString);
+	}
+	public static void changeDime(int quantity) {
+		String changeString = " dime";
+		if (quantity > 1) {
+			changeString += "s";
+		}
+		System.out.println(quantity + changeString);
+	}
+	public static void changeNickel(int quantity) {
+		String changeString = " nickel";
+		if (quantity > 1) {
+			changeString += "s";
+		}
+		System.out.println(quantity + changeString);
+	}
+	public static void changePenny(int quantity) {
+		String changeString = " penny";
+		if (quantity > 1) {
+			changeString = " pennies";
+		}
+		System.out.println(quantity + changeString);
 	}
 
 }
