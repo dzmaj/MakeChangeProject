@@ -5,9 +5,7 @@
 This is where I'll put a summary of my project.
 
 ### Topics
-* Taking User Input
-* Casting
-* Methods
+* Java Fundamentals
 
 #### How to Run
 
