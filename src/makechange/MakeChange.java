@@ -32,13 +32,16 @@ public class MakeChange {
 				System.out.println("Payment not enough");
 			} else {
 				// calculate change to give
+				if (change % 0.01 != 0) {
+					change = (int) ((change + 0.0001) * 100) / 100.0;
+				}
+				System.out.println("Change: $" + change);
 				calcChange(change);
 			}
 			// Ask if user wants another transaction
 			printSeparator(1);
 			System.out.println("Do you wish to enter another transaction? (y/n): ");
 			keepGoing = yesNoToBool(sc.next());
-			
 
 		}
 
@@ -50,28 +53,38 @@ public class MakeChange {
 
 	public static void calcChange(double changeAmount) {
 
-		int twentyAmount = 0, tenAmount = 0, fiveAmount = 0, oneAmount = 0, quarterAmount = 0, dimeAmount = 0,
-				nickelAmount = 0, pennyAmount = 0;
+		int hundredAmount = 0, fiftyAmount = 0, twentyAmount = 0, tenAmount = 0, fiveAmount = 0, oneAmount = 0,
+				quarterAmount = 0, dimeAmount = 0, nickelAmount = 0, pennyAmount = 0;
 
+		if (changeAmount / 100 >= 1) {
+			hundredAmount = (int) (changeAmount / 100);
+			changeAmount %= 100;
+			printChange(hundredAmount, "hundred dollar bill");
+		}
+		if (changeAmount / 50 >= 1) {
+			fiftyAmount = (int) (changeAmount / 50);
+			changeAmount %= 50;
+			printChange(fiftyAmount, "fifty dollar bill");
+		}
 		if (changeAmount / 20 >= 1) {
 			twentyAmount = (int) (changeAmount / 20);
 			changeAmount %= 20;
-			changeTwenty(twentyAmount);
+			printChange(twentyAmount, "twenty dollar bill");
 		}
 		if (changeAmount / 10 >= 1) {
 			tenAmount = (int) (changeAmount / 10);
 			changeAmount %= 10;
-			changeTen(tenAmount);
+			printChange(tenAmount, "ten dollar bill");
 		}
 		if (changeAmount / 5 >= 1) {
 			fiveAmount = (int) (changeAmount / 5);
 			changeAmount %= 5;
-			changeFive(fiveAmount);
+			printChange(fiveAmount, "five dollar bill");
 		}
-		if (changeAmount / 1 >= 1) {
+		if (changeAmount >= 1) {
 			oneAmount = (int) (changeAmount / 1);
 			changeAmount %= 1;
-			changeOne(oneAmount);
+			printChange(oneAmount, "one dollar bill");
 		}
 
 		// add a hundredth of a penny to correct for precision errors
@@ -80,26 +93,38 @@ public class MakeChange {
 		if (changeAmount / 0.25 >= 1) {
 			quarterAmount = (int) (changeAmount / 0.25);
 			changeAmount %= 0.25;
-			changeQuarter(quarterAmount);
+			printChange(quarterAmount, "quarter");
 		}
 		if (changeAmount / 0.10 >= 1) {
 			dimeAmount = (int) (changeAmount / 0.10);
 			changeAmount %= 0.10;
-			changeDime(dimeAmount);
+			printChange(dimeAmount, "dime");
 		}
 		if (changeAmount / 0.05 >= 1) {
 			nickelAmount = (int) (changeAmount / 0.05);
 			changeAmount %= 0.05;
-			changeNickel(nickelAmount);
+			printChange(nickelAmount, "nickel");
 		}
 		if (changeAmount / 0.01 >= 1) {
 			pennyAmount = (int) (changeAmount / 0.01);
 			changeAmount %= 0.01;
-			changePenny(pennyAmount);
+			printChange(pennyAmount, "penny", "pennies");
 		}
 
 	}
 	
+	
+	// in progress
+	public static double calcDenominationChange(double changeAmount, double value, String name, String plural) {
+		
+		if (changeAmount / value >= 1) {
+			int amount = (int)(changeAmount / value);
+			changeAmount %= value;
+			printChange(amount, name, plural);
+		}
+		return changeAmount;
+	}
+
 	public static boolean yesNoToBool(String input) {
 		switch (input) {
 		case "y":
@@ -120,68 +145,17 @@ public class MakeChange {
 		}
 	}
 
-	public static void changeTwenty(int quantity) {
-		String changeString = " twenty dollar bill";
+	public static void printChange(int quantity, String changeString) {
 		if (quantity > 1) {
 			changeString += "s";
 		}
-		System.out.println(quantity + changeString);
+		System.out.println(quantity + " " + changeString);
 	}
-
-	public static void changeTen(int quantity) {
-		String changeString = " ten dollar bill";
+	public static void printChange(int quantity, String changeString, String changeStringMultiple) {
 		if (quantity > 1) {
-			changeString += "s";
+			changeString = changeStringMultiple;
 		}
-		System.out.println(quantity + changeString);
-	}
-
-	public static void changeFive(int quantity) {
-		String changeString = " five dollar bill";
-		if (quantity > 1) {
-			changeString += "s";
-		}
-		System.out.println(quantity + changeString);
-	}
-
-	public static void changeOne(int quantity) {
-		String changeString = " one dollar bill";
-		if (quantity > 1) {
-			changeString += "s";
-		}
-		System.out.println(quantity + changeString);
-	}
-
-	public static void changeQuarter(int quantity) {
-		String changeString = " quarter";
-		if (quantity > 1) {
-			changeString += "s";
-		}
-		System.out.println(quantity + changeString);
-	}
-
-	public static void changeDime(int quantity) {
-		String changeString = " dime";
-		if (quantity > 1) {
-			changeString += "s";
-		}
-		System.out.println(quantity + changeString);
-	}
-
-	public static void changeNickel(int quantity) {
-		String changeString = " nickel";
-		if (quantity > 1) {
-			changeString += "s";
-		}
-		System.out.println(quantity + changeString);
-	}
-
-	public static void changePenny(int quantity) {
-		String changeString = " penny";
-		if (quantity > 1) {
-			changeString = " pennies";
-		}
-		System.out.println(quantity + changeString);
+		System.out.println(quantity + " " + changeString);
 	}
 
 	public static void printSeparator(int n) {
