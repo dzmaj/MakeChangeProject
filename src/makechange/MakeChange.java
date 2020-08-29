@@ -61,31 +61,30 @@ public class MakeChange {
 				oneAmount = (int)(changeAmount / 1);
 				changeAmount %= 1;
 				changeOne(oneAmount);
-				System.err.println(changeAmount);
 			}
+			
+			// add a hundredth of a penny to correct for precision
+			changeAmount += 0.0001;
+			
 			if (changeAmount / 0.25 >= 1 ) {
 				quarterAmount = (int)(changeAmount / 0.25);
 				changeAmount %= 0.25;
 				changeQuarter(quarterAmount);
-				System.err.println(changeAmount);
 			}
 			if (changeAmount / 0.10 >= 1 ) {
 				dimeAmount = (int)(changeAmount / 0.10);
 				changeAmount %= 0.10;
 				changeDime(dimeAmount);
-				System.err.println(changeAmount);
 			}
 			if (changeAmount / 0.05 >= 1 ) {
 				nickelAmount = (int)(changeAmount / 0.05);
 				changeAmount %= 0.05;
 				changeNickel(nickelAmount);
-				System.err.println(changeAmount);
 			}
 			if (changeAmount / 0.01 >= 1 ) {
 				pennyAmount = (int)(changeAmount / 0.01);
 				changeAmount %= 0.01;
 				changePenny(pennyAmount);
-				System.err.println(changeAmount);
 			}
 		
 		
