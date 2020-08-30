@@ -10,16 +10,16 @@ public class MakeChange {
 		double price, payment, change;
 
 		printSeparator(2);
-		System.out.println("---- Make Change ----");
+		System.out.println("--------- Make Change -----------------");
 		printSeparator(2);
 		boolean keepGoing = true;
 		while (keepGoing) {
 
 			// Get user inputs
 			printSeparator(1);
-			System.out.print("Enter the price of the item(s): ");
+			System.out.print("Enter the purchase price:   $");
 			price = sc.nextDouble();
-			System.out.print("Enter the payment amount: ");
+			System.out.print("Enter the payment tendered: $");
 			payment = sc.nextDouble();
 			// check change amount
 			change = payment - price;
@@ -29,13 +29,13 @@ public class MakeChange {
 				System.out.println("Exact change");
 			} else if (change < 0) {
 				// payment not enough
-				System.out.println("Payment not enough");
+				System.err.println("Insufficient payment");
+				System.out.println("Price:                      $" + (formatCents(price)));
+				System.out.println("Payment:                    $" + (formatCents(payment)));
+				System.out.println("Remaining payment required: $" + formatCents((-1 * change)));
 			} else {
-				// calculate change to give
-				if (change % 0.01 != 0) {
-					change = (int) ((change + 0.0001) * 100) / 100.0;
-				}
-				System.out.println("Change: $" + change);
+				change = roundCents(change);
+				System.out.println("Change:                     $" + formatCents(change));
 				calcAllChange(change);
 			}
 			// Ask if user wants another transaction
@@ -94,6 +94,23 @@ public class MakeChange {
 		System.out.println(amount + " " + name);
 		return changeAmount;
 	}
+	
+	public static double roundCents(double amount) {
+		amount = (int)((amount + 0.005) * 100) / 100.0;
+		return amount;
+	}
+	
+	public static String formatCents(double amount) {
+		String out = "";
+		amount = roundCents(amount);
+		if (amount % 1 == 0 || (amount * 10) % 1 == 0) {
+			out = amount + "0";
+		}
+		else {
+			out += amount;
+		}
+		return out;
+	}
 
 	public static boolean yesNoToBool(String input) {
 		switch (input) {
@@ -117,7 +134,7 @@ public class MakeChange {
 
 	public static void printSeparator(int n) {
 		for (int i = 0; i < n; i++) {
-			System.out.println("---------------------");
+			System.out.println("---------------------------------------");
 		}
 	}
 
